@@ -1,0 +1,36 @@
+--- a/ramdisk/build/cv1800b_milkv_duo_sd/workspace/multi.its
++++ b/ramdisk/build/cv1800b_milkv_duo_sd/workspace/multi.its
+@@ -23,6 +23,19 @@
+ 			};
+ 		};
+ 
++		kernel-2 {
++			description = "nomadium hello kernel";
++			data = /incbin/("./hello.bin");
++			type = "kernel";
++			arch = "riscv";
++			os = "linux";
++			compression = "none";
++			load = <0x0 0x80200000>;
++			entry = <0x0 0x80200000>;
++			hash-2 {
++				algo = "crc32";
++			};
++		};
+ 
+ 		/*FDT*/
+     
+@@ -50,6 +63,13 @@
+             fdt = "fdt-cv1800b_milkv_duo_sd";
+         };
+ 
++        config-cv1800b_milkv_duo_hello_sd {
++            description = "boot cvitek system with hello kernel on board cv1800b_milkv_duo_sd";
++            kernel = "kernel-2";
++            fdt = "fdt-cv1800b_milkv_duo_sd";
++        };
++
++
+     };
+ 
+ 
